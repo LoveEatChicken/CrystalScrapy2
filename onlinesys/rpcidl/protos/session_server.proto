@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package session;
+
+service SessionServer{
+    rpc Get (SessionSvrGetReq) returns (SessionSvrGetRes) {}
+    rpc Set (SessionSvrSetReq) returns (SessionSvrSetRes) {}
+}
+
+// 获取指定table中key为session_key的session信息
+// 中控下游的不同垂类，一个垂类可以用一个table存储session数据
+message SessionSvrGetReq{
+    string log_id = 1;
+    string session_key = 2;
+    repeated string table = 3;
+}
+
+message SessionSvrGetRes{
+}
+
+message SessionSvrSetReq{
+}
+
+message SessionSvrSetRes{
+}
+
+

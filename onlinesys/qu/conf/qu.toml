@@ -1,0 +1,11 @@
+[server]
+bindAddr = "10.10.139.235:10036"
+
+[log]
+    [log.locallog]
+    max_channel_size = "100"
+    filename = "log/qu.log"
+    level = "7"
+
+
+

@@ -1,0 +1,53 @@
+// utf8 encoding
+
+syntax = "proto3";
+
+package qu;
+
+// The Query Understand Server
+service QuServer{
+  // Query Parser
+  rpc Parse (QuServerRequest) returns (QuServerResponse) {}
+}
+
+// Qu Server Request
+message QuServerRequest {
+    // 整个系统串联的logid
+    string log_id = 1;
+    // 同时识别多个domain
+    repeated string domain = 2;
+    // 需要识别的query
+    string query = 3;
+}
+
+// Qu Server Response
+message QuServerResponse {
+    // 处理结果状态;
+    // 0 : 处理成功;非0异常状态码
+    int32 status = 1;
+    // 识别结果
+    repeated QuResult qu_res = 2;
+}
+
+message Slot {
+    // 槽位名
+    string name = 1;
+    // 槽位值
+    string value = 2;
+}
+
+message Intent {
+    // 意图识别的置信度，目前固定是1分
+    int32 score = 1;
+    // 该意图下可提取到的多个槽位信息
+    repeated Slot slot = 2;
+    // 意图的附加信息，需求的细分类从这个字段解析出来
+    string extra_attr = 3;
+}
+
+// 一个domain对应一个qu结果
+message QuResult {
+    string domain = 1;
+    // 识别出多个不同的意图
+    repeated Intent intent = 2;
+}

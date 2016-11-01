@@ -1,0 +1,17 @@
+[server]
+bindAddr = "10.10.139.235:10034"
+
+[log]
+    [log.locallog]
+    max_channel_size = "100"
+    filename = "log/fmbot.log"
+    level = "7"
+
+[fmsearch]
+client = [
+  "127.0.0.1:7302",
+  "192.168.0.1:7302"
+]
+
+
+

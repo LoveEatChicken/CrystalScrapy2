@@ -1,0 +1,55 @@
+// utf8 encoding
+
+syntax = "proto3";
+
+package search;
+
+service Searcher {
+    rpc Search(SeRequest) returns (SeResponse){}
+}
+
+message SeRequest {
+    string log_id = 1;
+
+    string query = 2;
+
+    // 是否调试模式
+    bool is_debug = 3;
+
+    // 结果分页,返回第page_num页,从0开始计数
+    int32 page_num = 4;
+    // 搜索分页, 每页大小page_size,
+    int32 page_size = 5;
+}
+
+message SeResponse {
+    // 返回结果数
+    int32 ret_num = 1;
+
+    // 显示的总结果数
+    int32 disp_num = 2;
+
+    // 返回的ret_num个结果
+    // 每个结果数一个string，可定制
+    // 一般实现为json串
+    repeated SeDoc res_list = 3;
+
+    // Query级别的debug信息
+    string debug = 4;
+}
+
+// 一个检索结果
+message SeDoc {
+    // 基础文本相关性
+    int32 bweight = 1;
+
+    // 调权后相关性
+    int32 weight = 2;
+
+    // 结果内容，字符串允许自由定制
+    string data = 3;
+
+    // debug信息
+    string debug = 4;
+}
+

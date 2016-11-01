@@ -1,0 +1,24 @@
+#
+#   闲聊服务运行时配置 V1.0
+#
+
+title = "Chat Service Config V1.0"
+
+[task]
+    bot_name = "chat_service"
+    bind_addr = "10.10.139.235:10031"
+    read_timeout = 10
+    write_timeout = 10
+    svr_suffix = 10001  #服务器下标，用户控制唯一ID的产生
+
+[log]
+    [log.locallog]
+        max_channel_size = 100
+        filename = "../log/chatsvr.log"
+        level = 7   #0=Emergency,1=Alert,2=Critical,3=Error,4=Warning,5=Notice,6=Informational,7=Debug
+
+[tuling]
+    apikey = "8596cf186497440787b70a8805693538"
+    apiurl = "http://www.tuling123.com/openapi/api"
+    connect_timeout = 10
+    send_timeout = 5

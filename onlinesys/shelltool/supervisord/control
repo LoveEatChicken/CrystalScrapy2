@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+
+PROGRAM="app"
+
+
+RUN_PATH=`cd $(dirname $0)/..;pwd`
+export RUN_PATH
+echo "program home : $RUN_PATH"
+RUN_CMD="bin/$(basename ${RUN_PATH})"
+export RUN_CMD
+echo "run cmd : $RUN_CMD"
+
+mkdir -p $RUN_PATH/tmp
+mkdir -p $RUN_PATH/log
+mkdir -p $RUN_PATH/data
+
+export LD_LIBRARY_PATH="$RUN_PATH/bin"
+
+#接收参数
+INTERFACE=$1
+shift
+
+#根据不同的参数选择不同的接口行为
+case "$INTERFACE" in
+	start)
+		$RUN_PATH/bin/supervisord -c $RUN_PATH/bin/supervisord.conf
+		RET=$?
+		echo -e "return value: ${RET}"
+		exit ${RET}
+		;;
+	stop)
+		$RUN_PATH/bin/supervisorctl -c $RUN_PATH/bin/supervisord.conf stop $PROGRAM 
+		$RUN_PATH/bin/supervisorctl -c $RUN_PATH/bin/supervisord.conf shutdown
+		RET=$?
+		echo -e "return value: ${RET}"
+		exit ${RET}
+		;;
+	restart)
+		$RUN_PATH/bin/supervisorctl -c $RUN_PATH/bin/supervisord.conf restart $PROGRAM 
+		RET=$?
+		echo -e "return value: ${RET}"
+		exit ${RET}
+		;;
+	*)
+		echo "Usage : $0 [start|stop|restart]"
+esac

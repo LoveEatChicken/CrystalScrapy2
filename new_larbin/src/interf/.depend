@@ -1,0 +1,58 @@
+# DO NOT DELETE
+
+defaultuseroutput.o: ../options.h ../config.h ../types.h ../global.h
+defaultuseroutput.o: ../fetch/file.h ../utils/url.h ../utils/string.h
+defaultuseroutput.o: ../utils/debug.h ../utils/Vector.h ../fetch/site.h
+defaultuseroutput.o: ../utils/Fifo.h ../fetch/specbuf.h ../fetch/hashTable.h
+defaultuseroutput.o: ../utils/hashDup.h ../utils/PersistentFifo.h
+defaultuseroutput.o: ../utils/text.h ../utils/connexion.h
+defaultuseroutput.o: ../utils/mypthread.h ../utils/ConstantSizedFifo.h
+defaultuseroutput.o: ../utils/SyncFifo.h ../fetch/checker.h
+defaultuseroutput.o: ../interf/output.h
+input.o: ../options.h ../config.h ../types.h ../global.h ../fetch/file.h
+input.o: ../utils/url.h ../utils/string.h ../utils/debug.h ../utils/Vector.h
+input.o: ../fetch/site.h ../utils/Fifo.h ../fetch/specbuf.h
+input.o: ../fetch/hashTable.h ../utils/hashDup.h ../utils/PersistentFifo.h
+input.o: ../utils/text.h ../utils/connexion.h ../utils/mypthread.h
+input.o: ../utils/ConstantSizedFifo.h ../utils/SyncFifo.h ../fetch/checker.h
+input.o: ../interf/input.h
+mirrorsaveuseroutput.o: ../options.h ../config.h ../types.h ../global.h
+mirrorsaveuseroutput.o: ../fetch/file.h ../utils/url.h ../utils/string.h
+mirrorsaveuseroutput.o: ../utils/debug.h ../utils/Vector.h ../fetch/site.h
+mirrorsaveuseroutput.o: ../utils/Fifo.h ../fetch/specbuf.h
+mirrorsaveuseroutput.o: ../fetch/hashTable.h ../utils/hashDup.h
+mirrorsaveuseroutput.o: ../utils/PersistentFifo.h ../utils/text.h
+mirrorsaveuseroutput.o: ../utils/connexion.h ../utils/mypthread.h
+mirrorsaveuseroutput.o: ../utils/ConstantSizedFifo.h ../utils/SyncFifo.h
+mirrorsaveuseroutput.o: ../fetch/checker.h ../interf/output.h
+output.o: ../options.h ../config.h ../types.h ../global.h ../fetch/file.h
+output.o: ../utils/url.h ../utils/string.h ../utils/debug.h ../utils/Vector.h
+output.o: ../fetch/site.h ../utils/Fifo.h ../fetch/specbuf.h
+output.o: ../fetch/hashTable.h ../utils/hashDup.h ../utils/PersistentFifo.h
+output.o: ../utils/text.h ../utils/connexion.h ../utils/mypthread.h
+output.o: ../utils/ConstantSizedFifo.h ../utils/SyncFifo.h ../fetch/checker.h
+output.o: ../interf/useroutput.h
+saveuseroutput.o: ../options.h ../config.h ../types.h ../global.h
+saveuseroutput.o: ../fetch/file.h ../utils/url.h ../utils/string.h
+saveuseroutput.o: ../utils/debug.h ../utils/Vector.h ../fetch/site.h
+saveuseroutput.o: ../utils/Fifo.h ../fetch/specbuf.h ../fetch/hashTable.h
+saveuseroutput.o: ../utils/hashDup.h ../utils/PersistentFifo.h
+saveuseroutput.o: ../utils/text.h ../utils/connexion.h ../utils/mypthread.h
+saveuseroutput.o: ../utils/ConstantSizedFifo.h ../utils/SyncFifo.h
+saveuseroutput.o: ../fetch/checker.h ../interf/output.h
+statsuseroutput.o: ../options.h ../config.h ../types.h ../global.h
+statsuseroutput.o: ../fetch/file.h ../utils/url.h ../utils/string.h
+statsuseroutput.o: ../utils/debug.h ../utils/Vector.h ../fetch/site.h
+statsuseroutput.o: ../utils/Fifo.h ../fetch/specbuf.h ../fetch/hashTable.h
+statsuseroutput.o: ../utils/hashDup.h ../utils/PersistentFifo.h
+statsuseroutput.o: ../utils/text.h ../utils/connexion.h ../utils/mypthread.h
+statsuseroutput.o: ../utils/ConstantSizedFifo.h ../utils/SyncFifo.h
+statsuseroutput.o: ../fetch/checker.h ../interf/output.h
+useroutput.o: ../options.h ../config.h ../interf/defaultuseroutput.cc
+useroutput.o: ../types.h ../global.h ../fetch/file.h ../utils/url.h
+useroutput.o: ../utils/string.h ../utils/debug.h ../utils/Vector.h
+useroutput.o: ../fetch/site.h ../utils/Fifo.h ../fetch/specbuf.h
+useroutput.o: ../fetch/hashTable.h ../utils/hashDup.h
+useroutput.o: ../utils/PersistentFifo.h ../utils/text.h ../utils/connexion.h
+useroutput.o: ../utils/mypthread.h ../utils/ConstantSizedFifo.h
+useroutput.o: ../utils/SyncFifo.h ../fetch/checker.h ../interf/output.h

@@ -1,0 +1,16 @@
+[server]
+bindAddr = "10.10.139.235:10032"
+
+[log]
+    [log.locallog]
+    max_channel_size = "100"
+    filename = "log/qabot.log"
+    level = "7"
+
+[qasearch]
+client = [
+  "10.10.139.235:10033"
+]
+
+
+

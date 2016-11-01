@@ -1,0 +1,72 @@
+#
+#   中控进程运行时配置 V1.0
+#
+
+title = "Rc Config V1.0"
+
+[task]
+    bind_addr = "10.10.139.235:10030"
+    read_timeout = 10
+    write_timeout = 10
+    svr_suffix = 10001              #服务器下标，用户控制唯一ID的产生
+    msg_pool_size = 10000	        #并发1万个请求
+    share_session = "global"        #共享session
+
+[mysql]
+    dns = "iwant:iwant@201506@tcp(10.10.139.235:3306)/iwant?charset=utf8"
+
+[mongodb]
+    addr = "10.10.139.235:27017"    #dial参数
+    max_session_size = 100          #dial次数
+    db = "iwant"                    #所使用的数据库
+
+[log]
+    [log.locallog]
+        max_channel_size = 100
+        filename = "../log/rcsvr.log"
+        level = 7   #0=Emergency,1=Alert,2=Critical,3=Error,4=Warning,5=Notice,6=Informational,7=Debug
+
+[qu]
+    address = "10.10.139.235:10036"
+    timeout = 3
+    
+#下游服务配置, 中控统一入口请求
+[[bots]]
+    #闲聊服务
+    name = "chat_service"
+    addr = "10.10.139.235:10031"
+    session = "chat_service"
+    timeout = 3     #每个service必须上报自己的建议超时
+    repeated = 0    #不需要重复发送,结果一次采纳
+    
+    [bots.rank]
+        higher = 100    #超过该分数则必须采纳
+        lower = 50      #低于该分数，则结果丢弃
+        default_level = 1   #默认场景下的优先级：0~100，数值越大优先级越高
+        replace_level = 3   #打分在上下限之间，允许低3个优先级的其他结果补充
+
+[[bots]]
+    #QA检索
+    name = "qabot"
+    addr = "10.10.139.235:10032"
+    session = "qabot"
+    timeout = 3     #每个service必须上报自己的建议超时
+    repeated = 0    #不需要重复发送,结果一次采纳
+    
+    [bots.rank]
+        higher = 80     #超过该分数则必须采纳
+        lower = 60      #低于该分数，则结果丢弃
+        default_level = 1   #默认场景下的优先级：0~100，数值越大优先级越高
+        replace_level = 3   #打分在上下限之间，允许低3个优先级的其他结果补充
+
+        
+[[scene]]
+    #测试:闲聊场景
+    name = "chat"
+    [[scene.bot]]
+        name = "chat_service"
+        level = 1       #0~100，数值越大优先级越高
+    [[scene.bot]]
+        name = "qabot"
+        level = 10      #0~100，数值越大优先级越高
+

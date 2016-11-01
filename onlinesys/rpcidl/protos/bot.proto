@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package bot;
+
+// 接入RobotCore的所有下游均实现该服务
+service BotServer {
+    rpc Work (BotRequest) returns (BotResponse) {}
+}
+
+message BotRequest {
+    // 基本信息
+    string bot_name = 1;
+    string log_id = 2;
+    string user_id = 3;
+    RequestType request_type = 4;
+    
+    string query = 5;
+    
+    // 用户个性化信息
+    UserInfo user_info = 100;
+    // 多个session
+    repeated UserSession session = 101;
+    // 用户的潜在意图
+    // 中控把当前bot需要理解的intent以及一些公共intent下发给下游bot
+    UserIntent intent = 102;
+
+}
+
+message BotResponse {
+    ReturnCode status = 1;
+    int32 score = 2; // 垂类对本次结果的自己打分:0-100
+
+    message ResultItem {
+        string card = 1; // 返回给用户端的一个卡片;json结构，垂类经rc透传给UI
+    }
+    // 多个返回结果，多张内容卡片
+    repeated ResultItem res_item = 10;
+
+    message Guide {
+        string text = 1; // 引导项文本
+    }
+    // 多个引导项
+    repeated Guide guide = 11;
+
+    // 多个session，回写
+    repeated UserSession session = 101;
+
+}
+
+// 用户个性化信息
+message UserInfo {
+    int32 gender = 1;   //性别: 0=未知；1=男；2=女
+}
+
+// 用户Session信息
+message UserSession {
+    string table_name = 1; // session的表名
+    string session_key = 2; 
+    string session_value = 3;
+}
+
+message Slot {
+    // 槽位名
+    string name = 1;
+    // 槽位值
+    string value = 2;
+}
+
+message Intent {
+    // 意图识别的置信度，目前固定是1分
+    int32 score = 1;
+    // 该意图下可提取到的多个槽位信息
+    repeated Slot slot = 2;
+    // 意图的附加信息，需求的细分类从这个字段解析出来
+    string extra_attr = 3;
+}
+
+// User意图
+message UserIntent{
+    // 识别出多个不同的意图
+    repeated Intent intent = 1;
+}
+
+enum RequestType {
+  ENQUIRE = 0; // 中控初步询问，不一定采纳你的结果
+  CONFIRM = 1; // 中控确认要采纳你的结果了
+}
+
+enum ReturnCode {
+  SUCCESS = 0; // 中控初步询问，不一定采纳你的结果
+  SYSERR = 1;  // 底层系统错误
+  NULLDATA = 2;// 无返回结果
+}
